@@ -14,6 +14,10 @@ spring:
 ---
 spring:
   profiles: dev
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/pig_data?autoReconnect=true&characterEncoding=utf8
+    username: root
+    password: root
 eureka:
   instance:
     prefer-ip-address: true
