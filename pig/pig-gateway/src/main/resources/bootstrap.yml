@@ -2,7 +2,7 @@ spring:
   application:
     name: pig-gateway
   profiles:
-    active: dev
+    active: native
   cloud:
     config:
       fail-fast: true
@@ -17,7 +17,7 @@ logging:
 
 ---
 spring:
-  profiles: dev
+  profiles: native
 eureka:
   instance:
     prefer-ip-address: true

@@ -2,7 +2,7 @@ spring:
   application:
     name: pig-upms-service
   profiles:
-    active: dev
+    active: native
   cloud:
     config:
       fail-fast: true
@@ -14,7 +14,7 @@ spring:
 
 ---
 spring:
-  profiles: dev
+  profiles: native
 eureka:
   instance:
     prefer-ip-address: true

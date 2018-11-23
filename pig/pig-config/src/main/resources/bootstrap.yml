@@ -22,11 +22,6 @@ endpoints:
 ---
 spring:
   profiles: native
-  rabbitmq:
-    host: 127.0.0.1
-    port: 5672
-    username: root
-    password: root
 eureka:
   instance:
     prefer-ip-address: true
