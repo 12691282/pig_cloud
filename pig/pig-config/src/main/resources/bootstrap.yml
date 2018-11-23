@@ -4,14 +4,13 @@ server:
 spring:
   application:
     name: pig-config-server
-  profiles:
-    active: dev
-  cloud:
-    config:
-      server:
-        git:
-          uri: https://gitee.com/cqzqxq_lxh/pig-config.git
-          default-label: ${spring.profiles.active}   #解决监控down
+  cloud :
+    config :
+      server :
+        native :
+          searchLocations : file:///${spring.application.name}
+  profiles :
+    active : native
 
 # 关闭安全管理
 management:
@@ -22,10 +21,10 @@ endpoints:
     sensitive: false
 ---
 spring:
-  profiles: dev
+  profiles: native
   rabbitmq:
     host: 127.0.0.1
-    port: 5682
+    port: 5672
     username: root
     password: root
 eureka:
@@ -39,10 +38,10 @@ eureka:
     registry-fetch-interval-seconds: 10
 ---
 spring:
-  profiles: prd
+  profiles: dev
   rabbitmq:
     host: 127.0.0.1
-    port: 5682
+    port: 5672
     username: root
     password: root
   cloud:

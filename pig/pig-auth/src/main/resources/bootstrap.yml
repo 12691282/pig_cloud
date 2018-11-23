@@ -2,7 +2,7 @@ spring:
   application:
     name: pig-auth
   profiles:
-    active: dev
+    active: native
   cloud:
     config:
       fail-fast: true
@@ -13,11 +13,7 @@ spring:
       label: ${spring.profiles.active}
 ---
 spring:
-  profiles: dev
-  datasource:
-    url: jdbc:mysql://127.0.0.1:3306/pig_data?autoReconnect=true&characterEncoding=utf8
-    username: root
-    password: root
+  profiles: native
 eureka:
   instance:
     prefer-ip-address: true
