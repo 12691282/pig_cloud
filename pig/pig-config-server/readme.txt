@@ -1,0 +1,1 @@
+pig config 文件读取目录
