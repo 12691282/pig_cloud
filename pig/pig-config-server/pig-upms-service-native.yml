@@ -1,5 +1,5 @@
 server:
-  port: 4000
+  port: ${random.int(10000,19999)}
 #Redis cache 过期时间设置
 redis:
   cache:
@@ -21,16 +21,16 @@ sharding:
       type: com.zaxxer.hikari.HikariDataSource
       driver-class-name: com.mysql.jdbc.Driver
       username: root
-      password: lengleng
-      jdbc-url: jdbc:mysql://127.0.0.1:3306/pig?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowMultiQueries=true
+      password: root
+      jdbc-url: jdbc:mysql://127.0.0.1:3306/pig_data?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowMultiQueries=true
     datasource:
       names: ds
       ds:
         type: com.zaxxer.hikari.HikariDataSource
         driver-class-name: com.mysql.jdbc.Driver
         username: root
-        password: lengleng
-        jdbc-url: jdbc:mysql://127.0.0.1:3306/pig?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowMultiQueries=true
+        password: root
+        jdbc-url: jdbc:mysql://127.0.0.1:3306/pig_data?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowMultiQueries=true
     config:
       sharding:
         tables:
