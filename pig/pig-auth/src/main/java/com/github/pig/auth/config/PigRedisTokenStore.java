@@ -65,7 +65,9 @@ public class PigRedisTokenStore implements TokenStore {
 
     @Override
     public OAuth2AccessToken getAccessToken(OAuth2Authentication authentication) {
+        log.info("Token info " + authentication.toString());
         String key = authenticationKeyGenerator.extractKey(authentication);
+        log.info("auth Token key " + key + " auth access key " + AUTH_TO_ACCESS + key);
         OAuth2AccessToken accessToken = (OAuth2AccessToken) redisTemplate.opsForValue().get(AUTH_TO_ACCESS + key);
         if (accessToken != null
                 && !key.equals(authenticationKeyGenerator.extractKey(readAuthentication(accessToken.getValue())))) {
@@ -95,7 +97,7 @@ public class PigRedisTokenStore implements TokenStore {
 
     @Override
     public void storeAccessToken(OAuth2AccessToken token, OAuth2Authentication authentication) {
-
+        log.info("token obj  ======>>>" + token + "and store access token");
         this.redisTemplate.opsForValue().set(ACCESS + token.getValue(), token);
         this.redisTemplate.opsForValue().set(AUTH + token.getValue(), authentication);
         this.redisTemplate.opsForValue().set(AUTH_TO_ACCESS + authenticationKeyGenerator.extractKey(authentication), token);
@@ -133,6 +135,7 @@ public class PigRedisTokenStore implements TokenStore {
 
     @Override
     public void removeAccessToken(OAuth2AccessToken accessToken) {
+        log.info(" accessToken " + accessToken.getValue());
         removeAccessToken(accessToken.getValue());
     }
 
@@ -164,17 +167,20 @@ public class PigRedisTokenStore implements TokenStore {
 
     @Override
     public void storeRefreshToken(OAuth2RefreshToken refreshToken, OAuth2Authentication authentication) {
+        log.info(" refreshToken " + refreshToken + " authentication " + authentication);
         this.redisTemplate.opsForValue().set(REFRESH + refreshToken.getValue(), refreshToken);
         this.redisTemplate.opsForValue().set(REFRESH_AUTH + refreshToken.getValue(), authentication);
     }
 
     @Override
     public OAuth2RefreshToken readRefreshToken(String tokenValue) {
+        log.info(" tokenValue " + tokenValue);
         return (OAuth2RefreshToken) this.redisTemplate.opsForValue().get(REFRESH + tokenValue);
     }
 
     @Override
     public void removeRefreshToken(OAuth2RefreshToken refreshToken) {
+        log.info(" refreshToken " + refreshToken);
         removeRefreshToken(refreshToken.getValue());
     }
 
@@ -186,6 +192,7 @@ public class PigRedisTokenStore implements TokenStore {
 
     @Override
     public void removeAccessTokenUsingRefreshToken(OAuth2RefreshToken refreshToken) {
+        log.info(" refreshToken " + refreshToken);
         removeAccessTokenUsingRefreshToken(refreshToken.getValue());
     }
 
@@ -200,6 +207,7 @@ public class PigRedisTokenStore implements TokenStore {
 
     @Override
     public Collection<OAuth2AccessToken> findTokensByClientIdAndUserName(String clientId, String userName) {
+        log.info(" clientId " + clientId + " userName " + userName);
         List<Object> result = redisTemplate.opsForList().range(UNAME_TO_ACCESS + getApprovalKey(clientId, userName), 0, -1);
 
         if (result == null || result.size() == 0) {
@@ -217,6 +225,7 @@ public class PigRedisTokenStore implements TokenStore {
 
     @Override
     public Collection<OAuth2AccessToken> findTokensByClientId(String clientId) {
+        log.info(" clientId " + clientId);
         List<Object> result = redisTemplate.opsForList().range((CLIENT_ID_TO_ACCESS + clientId), 0, -1);
 
         if (result == null || result.size() == 0) {

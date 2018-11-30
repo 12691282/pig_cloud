@@ -32,4 +32,12 @@ public class LogVO implements Serializable {
 
     private SysLog sysLog;
     private String username;
+
+    @Override
+    public String toString() {
+        return "LogVO{" +
+                "sysLog=" + sysLog +
+                ", username='" + username + '\'' +
+                '}';
+    }
 }

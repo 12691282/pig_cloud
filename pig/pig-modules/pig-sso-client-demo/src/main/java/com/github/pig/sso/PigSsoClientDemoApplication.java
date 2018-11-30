@@ -41,6 +41,8 @@ public class PigSsoClientDemoApplication {
 
 
     public static void main(String[] args) {
+//        String url = "http://127.0.0.1:9999/auth/oauth/token";
+        String url = "http://192.168.1.114:55015/bus/refresh";
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         MediaType type = MediaType.parseMediaType("application/json; charset=UTF-8");
@@ -48,8 +50,7 @@ public class PigSsoClientDemoApplication {
         headers.add("Accept", MediaType.APPLICATION_JSON.toString());
 
         HttpEntity<String> formEntity = new HttpEntity<String>("", headers);
-
-        String result = restTemplate.postForObject("http://192.168.1.114:49668/bus/refresh", formEntity, String.class);
+        String result = restTemplate.postForObject(url, formEntity, String.class);
 
 //        SpringApplication.run(PigSsoClientDemoApplication.class, args);
        System.out.println( result);

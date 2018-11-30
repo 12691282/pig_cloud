@@ -118,7 +118,9 @@ public class LogSendServiceImpl implements LogSendService {
             sysLog.setCreateBy(authentication.getName());
             logVo.setSysLog(sysLog);
             logVo.setUsername(authentication.getName());
+            //放入 MQ队列， 由 LogReceiveListener 读取存入数据库
             rabbitTemplate.convertAndSend(MqQueueConstant.LOG_QUEUE, logVo);
         }
+        log.info(String.format(" sysLog info %s", sysLog));
     }
 }

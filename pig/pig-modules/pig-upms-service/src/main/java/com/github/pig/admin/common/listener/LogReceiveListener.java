@@ -21,6 +21,7 @@ import com.github.pig.admin.service.SysLogService;
 import com.github.pig.common.constant.MqQueueConstant;
 import com.github.pig.common.entity.SysLog;
 import com.github.pig.common.vo.LogVO;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -31,6 +32,7 @@ import org.springframework.stereotype.Component;
  * @author lengleng
  * @date 2017/11/17
  */
+@Slf4j
 @Component
 @RabbitListener(queues = MqQueueConstant.LOG_QUEUE)
 public class LogReceiveListener {
@@ -41,6 +43,7 @@ public class LogReceiveListener {
 
     @RabbitHandler
     public void receive(LogVO logVo) {
+        log.info("receive log to save logVo " + logVo);
         SysLog sysLog = logVo.getSysLog();
         MDC.put(KEY_USER, logVo.getUsername());
         sysLog.setCreateBy(logVo.getUsername());
