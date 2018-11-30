@@ -5,8 +5,7 @@ logging:
 eureka:
   instance:
     prefer-ip-address: true
-    instance-id: ${spring.cloud.client.ipAddress}:${random.int(10000,19999)}
-
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
 
 #加密配置
 jasypt:
@@ -24,11 +23,7 @@ spring:
     host: 200.168.12.100
     port: 6379
     password: root
-  rabbitmq:
-    host: 127.0.0.1
-    port: 5672
-    username: root
-    password: root
+
   http:
     multipart:
       max-file-size: 1000MB

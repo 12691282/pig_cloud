@@ -32,6 +32,6 @@ public class PigConfigApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(PigConfigApplication.class, args);
-        System.out.println("ready to start");
+        System.out.println("ready to start ======>>>>>> success !");
     }
 }

@@ -1,6 +1,10 @@
-
 server:
   port: 0
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ipAddress}:${random.int(10000,19999)}
 
 spring:
   application:
