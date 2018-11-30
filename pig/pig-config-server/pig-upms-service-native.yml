@@ -1,9 +1,14 @@
-server:
-  port: ${random.int(10000,19999)}
+#server:
+#  port: 2001
 #Redis cache 过期时间设置
 redis:
   cache:
     expiration: 3600
+
+
+#eureka:
+#  instance:
+#    instance-id: ${spring.application.name}:${random.int(10000,19999)}
 
 # sleuth配置
 spring:

@@ -23,11 +23,14 @@ import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.xiaoleilu.hutool.collection.CollectionUtil;
 import com.xiaoleilu.hutool.util.StrUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+
+import javax.servlet.http.HttpServletRequest;
 
 import static org.springframework.cloud.netflix.zuul.filters.support.FilterConstants.FORM_BODY_WRAPPER_FILTER_ORDER;
 
@@ -37,6 +40,7 @@ import static org.springframework.cloud.netflix.zuul.filters.support.FilterConst
  * 在RateLimitPreFilter 之前执行，不然又空指针问题
  */
 @Component
+@Slf4j
 public class AccessFilter extends ZuulFilter {
     @Value("${zuul.ribbon.metadata.enabled:false}")
     private boolean canary;
@@ -59,7 +63,10 @@ public class AccessFilter extends ZuulFilter {
     @Override
     public Object run() {
         RequestContext requestContext = RequestContext.getCurrentContext();
-        String version = requestContext.getRequest().getHeader(SecurityConstants.VERSION);
+        HttpServletRequest request = requestContext.getRequest();
+        log.info(String.format("%s request to %s", request.getMethod(), request.getRequestURL().toString()));
+
+        String version = request.getHeader(SecurityConstants.VERSION);
         if (canary && StrUtil.isNotBlank(version)) {
             RibbonVersionHolder.setContext(version);
         }

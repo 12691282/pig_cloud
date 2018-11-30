@@ -17,9 +17,18 @@
 
 package com.github.pig.sso;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author lengleng
@@ -30,8 +39,22 @@ import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth
 @SpringBootApplication
 public class PigSsoClientDemoApplication {
 
+
     public static void main(String[] args) {
-        SpringApplication.run(PigSsoClientDemoApplication.class, args);
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        MediaType type = MediaType.parseMediaType("application/json; charset=UTF-8");
+        headers.setContentType(type);
+        headers.add("Accept", MediaType.APPLICATION_JSON.toString());
+
+        HttpEntity<String> formEntity = new HttpEntity<String>("", headers);
+
+        String result = restTemplate.postForObject("http://192.168.1.114:49668/bus/refresh", formEntity, String.class);
+
+//        SpringApplication.run(PigSsoClientDemoApplication.class, args);
+       System.out.println( result);
     }
+
+
 
 }
