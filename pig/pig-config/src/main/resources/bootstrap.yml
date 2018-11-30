@@ -1,5 +1,11 @@
 server:
-  port: 4001
+  port: 0
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ipAddress}:${random.int(10000,19999)}
+
 
 spring:
   application:
@@ -29,13 +35,13 @@ eureka:
     lease-expiration-duration-in-seconds: 20
   client:
     serviceUrl:
-      defaultZone: http://pig:gip6666@localhost:1025/eureka
+      defaultZone: http://pig:gip6666@200.168.12.100:1025/eureka
     registry-fetch-interval-seconds: 10
 ---
 spring:
   profiles: dev
   rabbitmq:
-    host: 127.0.0.1
+    host: 192.168.1.114
     port: 5672
     username: root
     password: root
@@ -51,4 +57,4 @@ eureka:
     prefer-ip-address: true
   client:
     serviceUrl:
-      defaultZone: http://pig:gip6666@eureka:1025/eureka
+      defaultZone: http://pig:gip6666@200.168.12.100:1025/eureka
