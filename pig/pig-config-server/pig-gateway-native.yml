@@ -25,7 +25,7 @@ zuul:
     connect-timeout-millis: 10000
     socket-timeout-millis: 10000
   ratelimit:
-    key-prefix: lion-ratelimite
+    key-prefix: pig-ratelimite
     enabled: true
     repository: REDIS
     behind-proxy: true
@@ -44,8 +44,8 @@ security:
   sessions: stateless
   oauth2:
     client:
-      client-id: lion
-      client-secret: lion
+      client-id: pig
+      client-secret: pig
     resource:
       jwt:
          key-uri: ${security.auth.server}/oauth/token_key #解析jwt令牌所需要密钥的地址
