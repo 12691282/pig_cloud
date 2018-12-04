@@ -1,6 +1,12 @@
 server:
   port: 3000
 
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+
+
 # datasoure默认使用JDBC
 spring:
   datasource:

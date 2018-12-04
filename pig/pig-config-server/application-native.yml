@@ -2,10 +2,7 @@
 logging:
   config: classpath:logback-spring.xml
 
-eureka:
-  instance:
-    prefer-ip-address: true
-    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+
 
 #加密配置
 jasypt:

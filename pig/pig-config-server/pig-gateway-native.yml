@@ -1,6 +1,12 @@
 server:
   port: 9999
 
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+
+
 spring:
   zipkin:
     rabbitmq:
@@ -19,7 +25,7 @@ zuul:
     connect-timeout-millis: 10000
     socket-timeout-millis: 10000
   ratelimit:
-    key-prefix: pig-ratelimite
+    key-prefix: lion-ratelimite
     enabled: true
     repository: REDIS
     behind-proxy: true
@@ -38,8 +44,8 @@ security:
   sessions: stateless
   oauth2:
     client:
-      client-id: pig
-      client-secret: pig
+      client-id: lion
+      client-secret: lion
     resource:
       jwt:
          key-uri: ${security.auth.server}/oauth/token_key #解析jwt令牌所需要密钥的地址
