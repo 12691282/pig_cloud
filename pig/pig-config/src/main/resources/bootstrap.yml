@@ -14,9 +14,9 @@ spring:
     config :
       server :
         native :
-          searchLocations : file:///${spring.application.name}
+          searchLocations : file:///Users/apple/my_project/titans_project/test2/${spring.application.name}
   profiles :
-    active : native
+    active : native, dev
 
 # 关闭安全管理
 management:
@@ -27,7 +27,7 @@ endpoints:
     sensitive: false
 ---
 spring:
-  profiles: native
+  profiles: dev
   rabbitmq:
     host: 127.0.0.1
     port: 5672
@@ -40,13 +40,13 @@ eureka:
     lease-expiration-duration-in-seconds: 20
   client:
     serviceUrl:
-      defaultZone: http://pig:gip6666@200.168.12.100:1025/eureka
+      defaultZone: http://pig:gip6666@127.0.0.1:1025/eureka
     registry-fetch-interval-seconds: 10
 ---
 spring:
-  profiles: dev
+  profiles: prd
   rabbitmq:
-    host: 192.168.1.114
+    host: 127.0.0.1
     port: 5672
     username: root
     password: root
@@ -62,4 +62,4 @@ eureka:
     prefer-ip-address: true
   client:
     serviceUrl:
-      defaultZone: http://pig:gip6666@200.168.12.100:1025/eureka
+      defaultZone: http://pig:gip6666@127.0.0.1:1025/eureka

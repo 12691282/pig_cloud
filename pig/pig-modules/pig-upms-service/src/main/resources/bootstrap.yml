@@ -10,7 +10,7 @@ spring:
   application:
     name: pig-upms-service
   profiles:
-    active: native
+    active: dev
   cloud:
     config:
       fail-fast: true
@@ -22,7 +22,7 @@ spring:
 
 ---
 spring:
-  profiles: native
+  profiles: dev
 eureka:
   instance:
     prefer-ip-address: true
@@ -30,7 +30,7 @@ eureka:
     lease-expiration-duration-in-seconds: 20
   client:
     serviceUrl:
-      defaultZone: http://pig:gip6666@200.168.12.100:1025/eureka
+      defaultZone: http://pig:gip6666@127.0.0.1:1025/eureka
     registry-fetch-interval-seconds: 10
 
 ---
@@ -41,4 +41,4 @@ eureka:
     prefer-ip-address: true
   client:
     serviceUrl:
-      defaultZone: http://pig:gip6666@200.168.12.100:1025/eureka
+      defaultZone: http://pig:gip6666@127.0.0.1:1025/eureka
