@@ -39,7 +39,7 @@ public class PigAuthServerApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(PigAuthServerApplication.class, args);
-        log.info("auth is ready");
+        log.info("  =======>>>>> auth is ready <<< ======");
     }
 
 }
