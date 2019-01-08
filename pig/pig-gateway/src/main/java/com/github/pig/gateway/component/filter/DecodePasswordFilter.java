@@ -101,7 +101,13 @@ public class DecodePasswordFilter extends ZuulFilter {
         return null;
     }
 
-
+    /**
+     * Cipher类 解密
+      * @param data 加密过的密文
+     * @param pass 解密key
+     * @return
+     * @throws Exception
+     */
     private static String decryptAES(String data, String pass) throws Exception {
         Cipher cipher = Cipher.getInstance(DEFAULT_CIPHER_ALGORITHM);
         SecretKeySpec keyspec = new SecretKeySpec(pass.getBytes(), KEY_ALGORITHM);
